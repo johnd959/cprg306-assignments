@@ -8,5 +8,5 @@ export default function StudentInfo()
             <Link href="https://github.com/johnd959/cprg306-assignments" target="_blank">Github Link</Link>
         </main>
 
-    )
+    );
 }
