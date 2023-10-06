@@ -37,7 +37,7 @@ export default function NewItem()
         return(
             <form className='grid grid-rows-3 m-4 p-5 gap-4 bg-blue-900'>
                 <div className='flex flex-row'>
-                    <input type="text" placeHolder="Item Name"value={name} onChange={handleNameChange} required className='mr-2 rounded-sm border-none focus:bg-gray-100'></input>
+                    <input type="text" placeholder="Item Name"value={name} onChange={handleNameChange} required className='mr-2 rounded-sm border-none focus:bg-gray-100'></input>
                     <input type="number" min="1" max="99" value={quantity} onChange={handleQuantityChange} required className='ml-2 rounded-sm border-none focus:bg-gray-100'></input>
                 </div>
                 <select className='rounded-lg focus:bg-gray-100' value={category} onChange={handleCategoryChange}>
