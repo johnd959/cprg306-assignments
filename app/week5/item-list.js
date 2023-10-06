@@ -71,17 +71,15 @@ export default function ItemList(){
           {sortBy == "groupByCat"
             ? itemsArr.map((arr, index) => (
                 <div
-                  className="m-4 p-2 flex flex-col bg-blue-500 text-white"
+                  className="m-4 p-2 flex flex-col text-black"
                   key={categories[index]}
                 >
                   <h2 className="font-bold text-xl capitalize">
                     {categories[index]}
                   </h2>
-                  <ol className="list-disc">
+                  <ol className="list-disc ml-8">
                     {arr.map((item) => (
-                      <li className="ml-8" key={item.id}>
-                        {item.name}
-                      </li>
+                        <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category}/>
                     ))}
                   </ol>
                 </div>
