@@ -44,25 +44,26 @@ export default function ItemList(){
 
     return (
       <section>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row gap-2">
+          <label>Sort Shopping List By:</label>
           <button
             onClick={handleSortChange}
             value="name"
-            className={sortBy == "name" ? "bg-blue-500" : "bg-gray-500"}
+            className={sortBy == "name" ? "bg-blue-500 p-2 text-white" : "bg-gray-500 text-black p-2"}
           >
             Name
           </button>
           <button
             onClick={handleSortChange}
             value="category"
-            className={sortBy == "category" ? "bg-blue-500" : "bg-gray-500"}
+            className={sortBy == "category" ? "bg-blue-500 p-2 text-white" : "bg-gray-500 text-black p-2"}
           >
             Category
           </button>
           <button
             onClick={handleSortChange}
             value="groupByCat"
-            className={sortBy == "groupByCat" ? "bg-blue-500" : "bg-gray-500"}
+            className={sortBy == "groupByCat" ? "bg-blue-500 p-2 text-white" : "bg-gray-500 text-black p-2"}
           >
             Group By Category
           </button>
@@ -77,11 +78,11 @@ export default function ItemList(){
                   <h2 className="font-bold text-xl capitalize">
                     {categories[index]}
                   </h2>
-                  <ol className="list-disc ml-8">
+                  <ul className="ml-8">
                     {arr.map((item) => (
                         <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category}/>
                     ))}
-                  </ol>
+                  </ul>
                 </div>
               ))
             : displayedItems.map((item) => (
