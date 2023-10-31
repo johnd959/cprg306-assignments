@@ -29,7 +29,7 @@ export default function Page() {
     return (
       <main>
         <h1>Welcome</h1>
-        {user == null ? <button onClick={handleOnLogIn}>Log In</button> : <p>Current User: {user?.displayName} <Link href='week8/shopping-list'>Shopping List</Link></p>}
+        {user == null ? <button onClick={handleOnLogIn}>Log In</button> : <div><p>Current User: {user?.displayName} </p> <Link href='week8/shopping-list'>Shopping List</Link></div>}
       </main>
     );
 }
