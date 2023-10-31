@@ -1,10 +1,14 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { useUserAuth } from "./_utils/auth-context";
+import Link from 'next/link'; 
+import { useEffect } from "react";
 
-const { user, gitHubSignIn, firebaseSignOut} = useUserAuth();
+export default function Page() {
 
-async function handleOnLogIn() {
+  const { user, gitHubSignIn, firebaseSignOut} = useUserAuth();
+  async function handleOnLogIn() {
     try
     {
         await gitHubSignIn();
@@ -16,26 +20,17 @@ async function handleOnLogIn() {
 
   }
 
-  async function handleOnLogOut() {
-    try
-    {
-        await firebaseSignOut();
-    }
-    catch(error)
-    {
-        console.log(error); 
-    }
-  }
+  useEffect(
+    () => {
+    },
+    [user]
+  )
 
-export default function Page() {
-
-
-  if (!user) {
     return (
       <main>
         <h1>Welcome</h1>
-        <button onClick={handleOnLogIn}>Log In</button>
+        {user == null ? <button onClick={handleOnLogIn}>Log In</button> : <p>Current User: {user?.displayName} <Link href='week8/shopping-list'>Shopping List</Link></p>}
       </main>
     );
-  }
 }
+
