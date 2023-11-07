@@ -3,6 +3,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import {
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   onAuthStateChanged,
   GithubAuthProvider,

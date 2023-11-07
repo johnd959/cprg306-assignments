@@ -2,35 +2,34 @@
 
 import { redirect } from "next/navigation";
 import { useUserAuth } from "./_utils/auth-context";
-import Link from 'next/link'; 
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function Page() {
-
-  const { user, gitHubSignIn, firebaseSignOut} = useUserAuth();
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
   async function handleOnLogIn() {
-    try
-    {
-        await gitHubSignIn();
+    try {
+      await gitHubSignIn();
+    } catch (error) {
+      console.log(error);
     }
-    catch(error)
-    {
-        console.log(error); 
-    }
-
   }
 
-  useEffect(
-    () => {
-    },
-    [user]
-  )
+  if (user != null) {
+    redirect("week8/shopping-list", 'push');
+  }
 
-    return (
-      <main>
-        <h1>Welcome</h1>
-        {user == null ? <button onClick={handleOnLogIn}>Log In</button> : <div><p>Current User: {user?.displayName} </p> <Link href='week8/shopping-list'>Shopping List</Link></div>}
-      </main>
-    );
+  return (
+    <main>
+      <h1>Welcome</h1>
+      {user == null ? (
+        <button onClick={handleOnLogIn}>Log In</button>
+      ) : (
+        <div>
+          <p>Current User: {user?.displayName} </p>
+          <Link href="week8/shopping-list">Shopping List</Link>
+        </div>
+      )}
+    </main>
+  );
 }
-

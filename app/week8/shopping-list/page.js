@@ -5,7 +5,8 @@ import itemsData from "./items.json";
 import { useEffect, useState } from "react";
 import MealIdeas from "./meal-ideas";
 import { useUserAuth } from "../_utils/auth-context";
-import Link from 'next/link';
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Page() {
   const [items, setItems] = useState(itemsData);
@@ -28,34 +29,32 @@ export default function Page() {
 
   async function handleOnSignOut() {
     try {
-        console.log("Trying to sign out");
+      console.log("Trying to sign out");
       await firebaseSignOut();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
-  console.log(`User: ${user?.displayName}`);
 
-    if (user != null)
-    {
-        return (
-    <main>
-      <h1 className="text-xl font-bold text-center py-6">Shopping List</h1>
-      <div className="flex flex-row p-6">
-        <div className="p-4">
-          <NewItem onAddItem={handleAddItem} />
-          <ItemList itemList={items} onItemSelect={handleItemSelect} />
+
+
+  if (user != null) {
+    console.log(`User: ${user?.displayName}`);
+    return (
+      <main>
+        <h1 className="text-xl font-bold text-center py-6">Shopping List</h1>
+        <div className="flex flex-row p-6">
+          <div className="p-4">
+            <NewItem onAddItem={handleAddItem} />
+            <ItemList itemList={items} onItemSelect={handleItemSelect} />
+          </div>
+          <MealIdeas ingredient={itemSelectedName} />
         </div>
-        <MealIdeas ingredient={itemSelectedName} />
-      </div>
-      <button onClick={handleOnSignOut}>Sign out</button>
-    </main>
-        )
-    }
-    else{
-        return(
-            <Link href='./'>Back to Week 8</Link>
-        )
-    }
+        <button onClick={handleOnSignOut}>Sign out</button>
+      </main>
+    );
+  } else {
+    return <Link href="./">Back to Week 8</Link>;
+  }
 }
